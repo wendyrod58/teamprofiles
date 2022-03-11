@@ -1,4 +1,4 @@
-function genenrateHTML(){
+function generateHTML(){
     return `
     <!DOCTYPE html>
 <html lang="en">
