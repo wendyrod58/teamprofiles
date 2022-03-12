@@ -3,6 +3,38 @@ const inquirer = require("inquirer");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
+const fs = require('fs');
+
+const generatePage = (allTeamMembers) => {
+    return `
+    <!DOCTYPE html> 
+    <html lang="en"> 
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="stylesheet" href="./style.css">
+      <title>Team Profiles</title>
+    </head>
+  
+    <body>
+      <h1>${allTeamMembers [0].name}</h1>
+      ${allTeamMembers.map(member => {
+        return `<div>
+        <p>ID: ${member.getName ()} </p>
+        <p>Name: ${member.getId ()}</p>
+        <p>Email: ${member.getEmail ()}</p>        
+      </div>`;
+      })}
+    </body>
+    </html>
+    `;
+};
+
+// function teamProfiles (
+
+// )
+
 
 const managerQuestions = [{
     name: "managerName",
@@ -72,6 +104,9 @@ const EngineerQuestions = [{
 
 let allTeamMembers = [];
 
+
+
+
 function init() {
     console.log("/n Welcome to team Generator /n ***************");
     inquirer.prompt(managerQuestions)
@@ -84,34 +119,38 @@ function init() {
             allTeamMembers.push(sample);
 
             //Ask again 
-            options(); 
+            options();
 
             //print all members 
             console.log(allTeamMembers);
         })
 }
-function options(){
+function options() {
     inquirer.prompt([{
-        name:"myoptions", 
-        message: "would you like to add a member? ", 
-        choices:["Intern", "Engineer", "No , thank you"], 
-        type:'list'
+        name: "myoptions",
+        message: "would you like to add a member? ",
+        choices: ["Intern", "Engineer", "No , thank you"],
+        type: 'list'
     }])
         .then(answers => {
-            console.log("MY options is ", answers); 
-            if( answers.myoptions === "Intern"){
-                askInternQuestions(); 
-            }else  if( answers.myoptions === "Engineer"){
+            console.log("MY options is ", answers);
+            if (answers.myoptions === "Intern") {
+                askInternQuestions();
+            } else if (answers.myoptions === "Engineer") {
                 askEngineerQuestions(); //refern intern Function 
-            }else { 
-                buildHTMLPage(); 
+            } else {
+
+                fs.writeFile('./dist/index.html', generatePage(allTeamMembers), err => {
+                    if (err) throw new Error(err);
+
+                })
             }
         })
 }
 
 
-function buildHTMLPage(){
-    console.log("Generate Template HTML"); 
+function buildHTMLPage() {
+    console.log("Generate Template HTML");
     //fs.writefile 
 
     console.log("Bye!!!")
@@ -130,7 +169,7 @@ function askInternQuestions() {
             console.log(allTeamMembers);
 
             //ask the question 
-            options(); 
+            options();
 
         })
 };
@@ -145,7 +184,7 @@ function askEngineerQuestions() {
             console.log(allTeamMembers);
 
             //ask the question 
-            options(); 
+            options();
 
         })
 };
