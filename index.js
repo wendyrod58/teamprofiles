@@ -5,6 +5,17 @@ const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 const fs = require('fs');
 
+// let html = ""
+//         if (member.getRole() == "Engineer") {
+//             html += <div class="cards">`
+//             <p>ID: ${_member_.getName()}</p>
+//             <p>Name: ${_member_.getId()}</p>
+//             <div/>`
+//        };
+
+
+
+
 const generatePage = (allTeamMembers) => {
     return `
     <!DOCTYPE html> 
@@ -24,14 +35,13 @@ const generatePage = (allTeamMembers) => {
         <p>ID: ${member.getName()}</p>
         <p>Name: ${member.getId()}</p>
         <p>Email: ${member.getEmail()}</p>
-        <p>Role: ${member.getRole()}</p>
-        <p>GitHub: ${member.getGitHub()}</p>
         </div>`;
     })}
     </body>
     </html>
     `;
-};
+}
+
 
 // function teamProfiles (
 
