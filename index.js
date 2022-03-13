@@ -18,22 +18,22 @@ const generatePage = (allTeamMembers) => {
     </head>
   
     <body>
-      <h1>${allTeamMembers [0].name}</h1>
+      <h1>Team Profiles</h1>
       ${allTeamMembers.map(member => {
-        return `<div>
-        <p>ID: ${member.getName ()} </p>
-        <p>Name: ${member.getId ()}</p>
-        <p>Email: ${member.getEmail ()}</p>        
-      </div>`;
-      })}
+        return `<div class="cards">
+        <p>ID: ${member.getName()}</p>
+        <p>Name: ${member.getId()}</p>
+        <p>Email: ${member.getEmail()}</p>
+        <p>Role: ${member.getRole()}</p>
+        <p>GitHub: ${member.getGitHub()}</p>
+        </div>`;
+    })}
     </body>
     </html>
     `;
 };
 
 // function teamProfiles (
-
-// )
 
 
 const managerQuestions = [{
@@ -55,7 +55,7 @@ const managerQuestions = [{
     name: "officeNumber",
     type: 'input',
     message: "Please enter Manager's Office Number: "
-}
+},
 ];
 
 const internQuestions = [{
@@ -77,8 +77,8 @@ const internQuestions = [{
     name: "school",
     type: 'input',
     message: "Please enter Intern's School/University: "
-}
-]
+},
+];
 
 const EngineerQuestions = [{
     name: "engineerName",
@@ -96,11 +96,11 @@ const EngineerQuestions = [{
     message: "Please enter Engineer's ID"
 },
 {
-    name: "GitHubUserName",
+    name: "GitHub",
     type: 'input',
-    message: "Please enter Engineer's GitHubUserName: "
-}
-]
+    message: "Please enter Engineer's GitHub: "
+},
+];
 
 let allTeamMembers = [];
 
@@ -108,7 +108,7 @@ let allTeamMembers = [];
 
 
 function init() {
-    console.log("/n Welcome to team Generator /n ***************");
+    console.log("/n Welcome to team Generator /n");
     inquirer.prompt(managerQuestions)
         .then(answers => {
             // console.log("manager Info", answers);
@@ -124,37 +124,7 @@ function init() {
             //print all members 
             console.log(allTeamMembers);
         })
-}
-function options() {
-    inquirer.prompt([{
-        name: "myoptions",
-        message: "would you like to add a member? ",
-        choices: ["Intern", "Engineer", "No , thank you"],
-        type: 'list'
-    }])
-        .then(answers => {
-            console.log("MY options is ", answers);
-            if (answers.myoptions === "Intern") {
-                askInternQuestions();
-            } else if (answers.myoptions === "Engineer") {
-                askEngineerQuestions(); //refern intern Function 
-            } else {
-
-                fs.writeFile('./dist/index.html', generatePage(allTeamMembers), err => {
-                    if (err) throw new Error(err);
-
-                })
-            }
-        })
-}
-
-
-function buildHTMLPage() {
-    console.log("Generate Template HTML");
-    //fs.writefile 
-
-    console.log("Bye!!!")
-}
+};
 
 function askInternQuestions() {
     inquirer.prompt(internQuestions)
@@ -177,7 +147,7 @@ function askInternQuestions() {
 function askEngineerQuestions() {
     inquirer.prompt(EngineerQuestions)
         .then(answers => {
-            const sample = new Engineer(answers.engineerName, answers.engineerID, answers.email, answers.GitHubUserName);
+            const sample = new Engineer(answers.engineerName, answers.engineerID, answers.email, answers.GitHub);
             allTeamMembers.push(sample);
 
             //print all members 
@@ -188,5 +158,35 @@ function askEngineerQuestions() {
 
         })
 };
+
+function options() {
+    inquirer.prompt([{
+        name: "myoptions",
+        message: "would you like to add a member? ",
+        choices: ["Intern", "Engineer", "No , thank you"],
+        type: 'list'
+    }])
+        .then(answers => {
+            console.log("MY options is ", answers);
+            if (answers.myoptions === "Intern") {
+                askInternQuestions();
+            } else if (answers.myoptions === "Engineer") {
+                askEngineerQuestions(); //refern intern Function 
+            } else {
+
+                fs.writeFile('./dist/index.html', generatePage(allTeamMembers), err => {
+                    if (err) throw new Error(err);
+
+                })
+            }
+        })
+};
+
+
+function buildHTMLPage() {
+    console.log("Generate Template HTML");
+    console.log("Bye!!!")
+};
+
 
 init(); 
