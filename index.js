@@ -36,20 +36,21 @@ const generatePage = (allTeamMembers) => {
                 <p>ID: ${member.getName()}</p>
                 <p>Name: ${member.getId()}</p>
                 <p>Email: ${member.getEmail()}</p>
-                <p>Github: ${member.getGitHub()}</p>
+                <p>Email: <a href="mailto:${member.getEmail()}">${member.getEmail()}</a></p>
+                <p>Github Username: <a href="https://github.com/${member.getGitHub()}" target="_blank">${member.getGitHub()}</a></p>
                 </div>`;
         } else if (member.getRole() === "Intern") {
             return `<div class="cards">
                 <p>ID: ${member.getName()}</p>
                 <p>Name: ${member.getId()}</p>
-                <p>Email: ${member.getEmail()}</p>
+                <p>Email: <a href="mailto:${member.getEmail()}">${member.getEmail()}</a></p>
                 <p>School Name: ${member.getSchool()}</p>
         </div>`;
         } else if (member.getRole() === "Manager") {
             return `<div class="cards">
                 <p>ID: ${member.getName()}</p>
                 <p>Name: ${member.getId()}</p>
-                <p>Email: ${member.getEmail()}</p>
+                <p>Email: <a href="mailto:${member.getEmail()}">${member.getEmail()}</a></p>
                 <p>Office Number: ${member.getOfficeNumber()}</p>
                 </div>`;
         }
