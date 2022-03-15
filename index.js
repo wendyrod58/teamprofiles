@@ -31,11 +31,28 @@ const generatePage = (allTeamMembers) => {
     <body>
       <h1>Team Profiles</h1>
       ${allTeamMembers.map(member => {
-        return `<div class="cards">
-        <p>ID: ${member.getName()}</p>
-        <p>Name: ${member.getId()}</p>
-        <p>Email: ${member.getEmail()}</p>
+        if (member.getRole() === "Engineer") {
+            return `<div class="cards">
+                <p>ID: ${member.getName()}</p>
+                <p>Name: ${member.getId()}</p>
+                <p>Email: ${member.getEmail()}</p>
+                <p>Github: ${member.getGitHub()}</p>
+                </div>`;
+        } else if (member.getRole() === "Intern") {
+            return `<div class="cards">
+                <p>ID: ${member.getName()}</p>
+                <p>Name: ${member.getId()}</p>
+                <p>Email: ${member.getEmail()}</p>
+                <p>School Name: ${member.getSchool()}</p>
         </div>`;
+        } else if (member.getRole() === "Manager") {
+            return `<div class="cards">
+                <p>ID: ${member.getName()}</p>
+                <p>Name: ${member.getId()}</p>
+                <p>Email: ${member.getEmail()}</p>
+                <p>Office Number: ${member.getOfficeNumber()}</p>
+                </div>`;
+        }
     })}
     </body>
     </html>
@@ -183,20 +200,15 @@ function options() {
             } else if (answers.myoptions === "Engineer") {
                 askEngineerQuestions(); //refern intern Function 
             } else {
-
+                console.log("Generating  Team  HTML ...");
                 fs.writeFile('./dist/index.html', generatePage(allTeamMembers), err => {
                     if (err) throw new Error(err);
-
+                    console.log("Bye!!!")
                 })
             }
         })
 };
 
-
-function buildHTMLPage() {
-    console.log("Generate Template HTML");
-    console.log("Bye!!!")
-};
 
 
 init(); 

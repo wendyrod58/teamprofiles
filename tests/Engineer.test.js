@@ -15,7 +15,7 @@ describe("engineer object testing", () => {
     });
 
     test('checks if GitHubUserName is equal to john58', () => {
-        expect(engineer.getGitHubUserName()).toBe("john58");
+        expect(engineer.getGitHub()).toBe("john58");
     });
 
 })
