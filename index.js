@@ -28,8 +28,8 @@ const generatePage = (allTeamMembers) => {
       ${allTeamMembers.map(member => {
         if (member.getRole() === "Engineer") {
             return `
-            <div class="card">
-            <div class="card-body">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                        <div class="card-body">
             <p>ID: ${member.getName()}</p>
                 <p>Name: ${member.getId()}</p>
                 <p>Email: ${member.getEmail()}</p>
@@ -39,7 +39,7 @@ const generatePage = (allTeamMembers) => {
                 </div>`;
         } else if (member.getRole() === "Intern") {
             return `
-            <div class="card">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
             <div class="card-body">
                 <p>ID: ${member.getName()}</p>
                 <p>Name: ${member.getId()}</p>
@@ -49,7 +49,7 @@ const generatePage = (allTeamMembers) => {
         </div>`;
         } else if (member.getRole() === "Manager") {
             return `
-            <div class="card">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
             <div class="card-body">
                 <p>ID: ${member.getName()}</p>
                 <p>Name: ${member.getId()}</p>
