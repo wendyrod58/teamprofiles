@@ -5,16 +5,6 @@ const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 const fs = require('fs');
 
-// let html = ""
-//         if (member.getRole() == "Engineer") {
-//             html += <div class="cards">`
-//             <p>ID: ${_member_.getName()}</p>
-//             <p>Name: ${_member_.getId()}</p>
-//             <div/>`
-//        };
-
-
-
 
 const generatePage = (allTeamMembers) => {
     return `
@@ -23,43 +13,80 @@ const generatePage = (allTeamMembers) => {
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <link rel="stylesheet" href="./style.css">
+      <link rel="stylesheet" href="./dist/style.css">
       <title>Team Profiles</title>
     </head>
   
     <body>
-      <h1>Team Profiles</h1>
+    <header class="jumbotron">
+    <h1>My Team</h1>
+</header>
+
+      <div class="card-group">
       ${allTeamMembers.map(member => {
         if (member.getRole() === "Engineer") {
-            return `<div class="cards">
-                <p>ID: ${member.getName()}</p>
+            return `
+            <div class="card">
+            <div class="card-body">
+            <p>ID: ${member.getName()}</p>
                 <p>Name: ${member.getId()}</p>
                 <p>Email: ${member.getEmail()}</p>
                 <p>Email: <a href="mailto:${member.getEmail()}">${member.getEmail()}</a></p>
                 <p>Github Username: <a href="https://github.com/${member.getGitHub()}" target="_blank">${member.getGitHub()}</a></p>
+                </div> 
                 </div>`;
         } else if (member.getRole() === "Intern") {
-            return `<div class="cards">
+            return `
+            <div class="card">
+            <div class="card-body">
                 <p>ID: ${member.getName()}</p>
                 <p>Name: ${member.getId()}</p>
                 <p>Email: <a href="mailto:${member.getEmail()}">${member.getEmail()}</a></p>
                 <p>School Name: ${member.getSchool()}</p>
+                </div> 
         </div>`;
         } else if (member.getRole() === "Manager") {
-            return `<div class="cards">
+            return `
+            <div class="card">
+            <div class="card-body">
                 <p>ID: ${member.getName()}</p>
                 <p>Name: ${member.getId()}</p>
                 <p>Email: <a href="mailto:${member.getEmail()}">${member.getEmail()}</a></p>
                 <p>Office Number: ${member.getOfficeNumber()}</p>
+                </div>
                 </div>`;
         }
     })}
+    </div>
     </body>
     </html>
     `;
 }
 
+// bootstrap instructions
+
+{/* <div class="card-group">
+
+<div class="card">
+    <div class="card-body"> */}
+{/* <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Cras justo odio</li>
+    <li class="list-group-item">Dapibus ac facilisis in</li>
+    <li class="list-group-item">Vestibulum at eros</li>
+  </ul>
+  <div class="card-body">
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div> */}
 
 // function teamProfiles (
 
@@ -83,7 +110,7 @@ const managerQuestions = [{
     name: "officeNumber",
     type: 'input',
     message: "Please enter Manager's Office Number: "
-},
+}
 ];
 
 const internQuestions = [{
@@ -105,7 +132,7 @@ const internQuestions = [{
     name: "school",
     type: 'input',
     message: "Please enter Intern's School/University: "
-},
+}
 ];
 
 const EngineerQuestions = [{
@@ -127,7 +154,7 @@ const EngineerQuestions = [{
     name: "GitHub",
     type: 'input',
     message: "Please enter Engineer's GitHub: "
-},
+}
 ];
 
 let allTeamMembers = [];
